@@ -9,12 +9,26 @@
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
   </head>
   <body>
-    <a-scene cursor="rayOrigin: mouse; fuse: true; fuseTimeout: 500">
-      <a-assets>
-        <img id="boxTexture" src="../../assets/img/face.jpg" />
-      </a-assets>
-
-      <a-box position="0 2 -5" rotation="0 45 45" scale-on-mouseenter></a-box>
+    <!-- <a-scene cursor="rayOrigin: mouse; fuse: true; fuseTimeout: 500"> -->
+    <a-scene>
+      <a-box
+        cursor-listener
+        position="3 2 -5"
+        rotation="0 45 45"
+        scale-on-mouseenter
+      ></a-box>
+      <a-box
+        cursor-listener
+        position="0 2 -5"
+        rotation="0 45 45"
+        scale-on-mouseenter
+      ></a-box>
+      <a-box
+        cursor-listener
+        position="-3 2 -5"
+        rotation="0 45 45"
+        scale-on-mouseenter
+      ></a-box>
 
       <a-entity
         text="value: Hello, A-Frame; color: #FAFAFA; width: 5; anchor: align"
@@ -23,9 +37,22 @@
       ></a-entity>
       <a-entity id="rig">
         <a-entity camera look-controls wasd-controls position="0 1.6 0">
-          <a-cursor raycaster fuse="true" fuseTimeout="500"></a-cursor>
+          <a-cursor raycaster></a-cursor>
+          <!-- <a-cursor></a-cursor> -->
         </a-entity>
       </a-entity>
+
+      <a-entity laser-controls="hand: left"></a-entity>
+      <a-entity oculus-touch-controls="hand: left" wasd-controls></a-entity>
+      <!-- <a-entity camera look-controls>
+        <a-entity
+          cursor="fuse: true; fuseTimeout: 500"
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+          material="color: black; shader: flat"
+        >
+        </a-entity>
+      </a-entity> -->
 
       <!-- Out of the box environment! -->
       <!-- Try changing the preset to one of default, contact, egypt, checkerboard, forest, goaland, yavapai, goldmine, 
@@ -46,6 +73,18 @@
       //     });
       //   },
       // });
+
+      AFRAME.registerComponent("cursor-listener", {
+        init: function () {
+          var lastIndex = -1;
+          var COLORS = ["red", "green", "blue"];
+          this.el.addEventListener("click", function (evt) {
+            lastIndex = (lastIndex + 1) % COLORS.length;
+            this.setAttribute("material", "color", COLORS[lastIndex]);
+            console.log("I was clicked at: ", evt.detail.intersection.point);
+          });
+        },
+      });
     </script>
   </body>
 </html>
