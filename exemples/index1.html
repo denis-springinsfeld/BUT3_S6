@@ -34,18 +34,18 @@
       <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
     </a-scene>
     <script>
-      AFRAME.registerComponent("scale-on-mouseenter", {
-        init: function () {
-          const el = this.el;
-          this.el.addEventListener("mouseenter", () => {
-            el.setAttribute("color", "#E75A87");
-            console.log(el);
-          });
-          this.el.addEventListener("mouseleave", () => {
-            el.setAttribute("color", "#4CC3D9");
-          });
-        },
-      });
+      // AFRAME.registerComponent("scale-on-mouseenter", {
+      //   init: function () {
+      //     const el = this.el;
+      //     this.el.addEventListener("mouseenter", () => {
+      //       el.setAttribute("color", "#E75A87");
+      //       console.log(el);
+      //     });
+      //     this.el.addEventListener("mouseleave", () => {
+      //       el.setAttribute("color", "#4CC3D9");
+      //     });
+      //   },
+      // });
     </script>
   </body>
 </html>
