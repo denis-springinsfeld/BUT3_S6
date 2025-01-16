@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My A-Frame Scene</title>
+
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene generate-cubes>
+      <!-- Rotating box -->
+      <a-entity
+        class="clickable"
+        id="rotating-box"
+        geometry="primitive: box"
+        position="0 2 -5"
+        material="color: blue"
+        rotation="0 0 0"
+        interactable
+      ></a-entity>
+
+      <!-- Camera rig with laser pointer -->
+      <a-entity id="rig" position="0 0 0">
+        <a-entity camera look-controls position="0 1.6 0"></a-entity>
+        <a-entity
+          laser-controls="hand: left"
+          raycaster="objects: .clickable; far: 20; showLine: true lineColor: red; lineOpacity: 0.5"
+          position="-0.5 1.5 -0.5"
+        ></a-entity>
+      </a-entity>
+
+      <!-- Environment -->
+      <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
+    </a-scene>
+
+    <script>
+      AFRAME.registerComponent("generate-cubes", {
+        init: function () {
+          for (let i = 0; i < 100; i++) {
+            const cube = document.createElement("a-box");
+            cube.setAttribute("position", {
+              x: Math.random() * 20 - 10,
+              y: Math.random() * 20,
+              z: Math.random() * 20 - 10,
+            });
+            cube.setAttribute(
+              "color",
+              `#${Math.floor(Math.random() * 16777215).toString(16)}`
+            );
+            cube.setAttribute("class", "clickable");
+            cube.setAttribute("interactable", "");
+            this.el.appendChild(cube);
+          }
+        },
+      });
+
+      // Component to enable rotation on interaction
+      AFRAME.registerComponent("interactable", {
+        init: function () {
+          // Add event listener for the laser interaction
+          this.el.addEventListener("mouseenter", () => {
+            this.el.setAttribute("material", "color", "red"); // Visual feedback
+          });
+
+          this.el.addEventListener("mouseleave", () => {
+            this.el.setAttribute("material", "color", "blue"); // Reset color
+          });
+
+          this.el.addEventListener("click", () => {
+            let rotation = this.el.getAttribute("rotation");
+            rotation.y += 45;
+            this.el.setAttribute("rotation", rotation);
+          });
+        },
+      });
+    </script>
+  </body>
+</html>
