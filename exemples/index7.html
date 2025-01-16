@@ -6,16 +6,15 @@
     <title>Document</title>
 
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
-
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
   </head>
   <body>
     <!-- <a-scene cursor="rayOrigin: mouse; fuse: true; fuseTimeout: 500"> -->
     <a-scene>
-      <a-box cursor-listener position="3 2 -5" rotation="0 45 45"></a-box>
-      <a-box cursor-listener position="0 2 -5" rotation="0 45 45"></a-box>
-      <a-box position="-3 2 -5" rotation="0 45 45"></a-box>
+      <a-box class="clickable" cursor-listener position="3 2 -5"></a-box>
+      <a-box class="clickable" cursor-listener position="0 2 -5"></a-box>
+      <a-box class="clickable" cursor-listener position="-3 2 -5"></a-box>
 
       <a-entity
         text="value: Hello, A-Frame; color: #FAFAFA; width: 5; anchor: align"
@@ -23,18 +22,23 @@
         scale="1 1 1"
       ></a-entity>
 
-      <a-entity id="player">
-        <!-- camera -->
-        <a-entity id="camera" camera wasd-controls look-controls></a-entity>
-        <!-- hand controls -->
+      <a-entity id="rig" movement-controls position="1 0 1">
         <a-entity
-          id="left-hand"
+          camera
+          position="0 1.6 0"
+          look-controls="pointerLockEnabled: true"
+          cursor="rayOrigin: mouse"
+        >
+        </a-entity>
+        <a-entity
           oculus-touch-controls="hand: left"
-          blink-controls
+          laser-controls="hand: left"
+          raycaster="objects: .clickable; far: 10; showLine: true"
         ></a-entity>
         <a-entity
-          id="right-hand"
           oculus-touch-controls="hand: right"
+          laser-controls="hand: right"
+          raycaster="objects: .clickable; far: 10; showLine: true"
         ></a-entity>
       </a-entity>
 
