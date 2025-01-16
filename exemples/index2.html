@@ -12,9 +12,9 @@
   <body>
     <!-- <a-scene cursor="rayOrigin: mouse; fuse: true; fuseTimeout: 500"> -->
     <a-scene>
-      <a-box cursor-listener position="3 2 -5" rotation="0 45 45"></a-box>
-      <a-box cursor-listener position="0 2 -5" rotation="0 45 45"></a-box>
-      <a-box position="-3 2 -5" rotation="0 45 45"></a-box>
+      <a-box cursor-listener position="3 2 -5"></a-box>
+      <a-box cursor-listener position="0 2 -5"></a-box>
+      <a-box class="clickable" position="-3 2 -5"></a-box>
 
       <a-entity
         text="value: Hello, A-Frame; color: #FAFAFA; width: 5; anchor: align"
@@ -22,7 +22,7 @@
         scale="1 1 1"
       ></a-entity>
 
-      <a-entity id="rig" movement-controls position="25 0 25">
+      <a-entity id="rig" movement-controls position="1 0 1">
         <a-entity
           camera
           position="0 1.6 0"
@@ -33,10 +33,14 @@
         <a-entity
           oculus-touch-controls="hand: left"
           laser-controls="hand: left"
+          raycaster="objects: .clickable"
+          line="color: red; opacity: 0.75"
         ></a-entity>
         <a-entity
           oculus-touch-controls="hand: right"
           laser-controls="hand: right"
+          raycaster="objects: .clickable"
+          line="color: red; opacity: 0.75"
         ></a-entity>
       </a-entity>
 
