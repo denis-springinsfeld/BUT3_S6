@@ -5,7 +5,6 @@
     <title>Interaction Laser</title>
     <!-- A-Frame JavaScript library -->
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
 
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
@@ -23,12 +22,19 @@
       ></a-entity>
 
       <!-- Camera -->
-      <a-entity id="rig">
+      <a-entity id="rig" position="0 0 0">
         <a-entity camera look-controls position="0 1.6 0"></a-entity>
         <a-entity
           laser-controls="hand: left"
-          raycaster="objects: .clickable; far: 20; showLine: true; color: red; opacity: 0.75; end: 0 0 -20"
+          raycaster="objects: .clickable; far: 20; showLine: true"
+          line="color: red; opacity: 0.75; end: 0 0 -20"
           position="-0.5 1.5 -0.5"
+        ></a-entity>
+        <a-entity
+          laser-controls="hand: right"
+          raycaster="objects: .clickable; far: 20; showLine: true"
+          line="color: red; opacity: 0.75; end: 0 0 -20"
+          position="0.5 1.5 -0.5"
         ></a-entity>
       </a-entity>
 
