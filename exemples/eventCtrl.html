@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
   </head>
   <body>
-    <a-scene>
+    <a-scene generate-cubes>
       <!-- Rotating box -->
       <a-entity
         class="clickable"
@@ -47,7 +47,7 @@
             const cube = document.createElement("a-box");
             cube.setAttribute("position", {
               x: Math.random() * 20 - 10,
-              y: Math.random() * 20 + 10,
+              y: Math.random() * 20,
               z: Math.random() * 20 - 10,
             });
             cube.setAttribute("color", "#8B0000");
