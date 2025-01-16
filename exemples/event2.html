@@ -14,7 +14,7 @@
         geometry="primitive: box"
         position="0 2 -5"
         class="interact"
-        color="yellow"
+        color="#4CC3D9"
         event-set__click="_event: click; visible: false"
         event-set__enter="_event: mouseenter; color: red"
         event-set__leave="_event: mouseleave; color: yellow"
@@ -22,16 +22,11 @@
 
       <!-- Camera -->
       <a-entity id="rig">
+        <a-entity camera look-controls position="0 1.6 0"></a-entity>
         <a-entity
-          camera
-          look-controls
-          wasd-controls
-          position="0 1.6 0"
-        ></a-entity>
-        <!-- Laser-control -->
-        <a-entity
-          laser-controls="hand: left;"
-          raycaster="objects: .interact; lineColor: red; lineOpacity: 0.5"
+          laser-controls="hand: left"
+          raycaster="objects: .clickable; far: 20; showLine: true"
+          line="color: red; opacity: 0.75; end: 0 0 -20"
           position="-0.5 1.5 -0.5"
         ></a-entity>
       </a-entity>
