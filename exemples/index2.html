@@ -24,7 +24,11 @@
         <a-entity camera position="0 1.6 0"> </a-entity>
       </a-entity>
 
-      <a-entity oculus-touch-controls="hand: left" wasd-controls></a-entity>
+      <a-entity
+        oculus-touch-controls="hand: left"
+        look-controls
+        laser-controls="hand: left"
+      ></a-entity>
 
       <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
     </a-scene>
