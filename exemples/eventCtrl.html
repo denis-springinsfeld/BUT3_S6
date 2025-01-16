@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A-Frame Interaction</title>
+
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Rotating box -->
+      <a-entity
+        id="rotating-box"
+        geometry="primitive: box"
+        position="0 2 -5"
+        material="color: blue"
+        rotation="0 0 0"
+        interactable
+      ></a-entity>
+
+      <!-- Camera rig with laser pointer -->
+      <a-entity id="rig">
+        <a-entity
+          camera
+          look-controls
+          position="0 1.6 0"
+          laser-controls="hand: right"
+        ></a-entity>
+      </a-entity>
+
+      <!-- Environment -->
+      <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
+    </a-scene>
+
+    <script>
+      // Component to enable rotation on interaction
+      AFRAME.registerComponent("interactable", {
+        init: function () {
+          // Add event listener for the laser interaction
+          this.el.addEventListener("mouseenter", () => {
+            this.el.setAttribute("color", "red"); // Visual feedback on hover
+          });
+
+          this.el.addEventListener("mouseleave", () => {
+            this.el.setAttribute("color", "blue"); // Reset color on leave
+          });
+
+          // Add event listener for controller button click
+          this.el.addEventListener("triggerdown", () => {
+            if (!this.el.isRotating) {
+              this.el.setAttribute("rotation-anim", "speed: 1"); // Start rotation
+              this.el.isRotating = true;
+            } else {
+              this.el.removeAttribute("rotation-anim"); // Stop rotation
+              this.el.isRotating = false;
+            }
+          });
+        },
+      });
+
+      // Rotation animation component
+      AFRAME.registerComponent("rotation-anim", {
+        schema: {
+          speed: { type: "number", default: 1 },
+        },
+        tick: function (time, timeDelta) {
+          let rotation = this.el.getAttribute("rotation");
+          rotation.y += this.data.speed * (timeDelta / 1000); // Increment rotation
+          this.el.setAttribute("rotation", rotation); // Update rotation
+        },
+      });
+    </script>
+  </body>
+</html>
