@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sol irrégulier avec A-Frame</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Sol irrégulier -->
+      <a-entity
+        geometry="primitive: plane; height: 10; width: 10; segmentsHeight: 50; segmentsWidth: 50"
+        material="color: #fff; wireframe: false"
+        position="0 0 0"
+        rotation="-90 0 0"
+        id="terrain"
+      >
+      </a-entity>
+
+      <!-- Lumière -->
+      <a-light type="ambient" intensity="0.5"></a-light>
+      <a-light type="point" position="2 4 2" intensity="0.8"></a-light>
+
+      <!-- Caméra -->
+      <a-camera position="0 3 10"></a-camera>
+    </a-scene>
+
+    <script>
+      // Génération des irrégularités pour le sol
+      AFRAME.registerComponent("random-terrain", {
+        init: function () {
+          const mesh = this.el.getObject3D("mesh");
+          if (!mesh) return;
+
+          const geometry = mesh.geometry;
+          const vertices = geometry.attributes.position.array;
+
+          for (let i = 0; i < vertices.length; i += 3) {
+            vertices[i + 2] += (Math.random() - 0.5) * 1; // Altitude aléatoire sur l'axe Z
+          }
+
+          geometry.attributes.position.needsUpdate = true;
+          geometry.computeVertexNormals();
+        },
+      });
+
+      // Appliquer le composant au terrain
+      document.querySelector("#terrain").setAttribute("random-terrain", "");
+    </script>
+  </body>
+</html>
