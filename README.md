@@ -14,6 +14,13 @@ https://docs.google.com/spreadsheets/d/1Ly7VBCWj0yJb8mM23XbKz0hqFLzxJTH5NuOIlais
 ### Mixin
 
 ```html
+      <a-assets>
+        <a-mixin id="fire-truck-rig" gltf-model="url(https://assets.3dstreet.app/sets/vehicles-rig/gltf-exports/draco/fire-truck-pumper-rig.glb)"></a-mixin>
+      </a-assets>
+      <a-entity position="0 0 -9" mixin="fire-truck-rig"></a-entity>
+```
+
+```html
 <a-scene>
   <a-assets>
     <a-asset-item id="ftruck-model" src="https://assets.3dstreet.app/sets/vehicles-rig/gltf-exports/draco/fire-truck-pumper-rig.glb"></a-asset-item>
