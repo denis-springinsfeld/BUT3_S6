@@ -94,5 +94,10 @@ https://docs.google.com/spreadsheets/d/1Ly7VBCWj0yJb8mM23XbKz0hqFLzxJTH5NuOIlais
       </a-entity>
     </a-scene>
   </body>
+
+
+## Animation GLTF
+
+https://github.com/rexraptor08/animation-controls?tab=readme-ov-file
 </html>
 ```
