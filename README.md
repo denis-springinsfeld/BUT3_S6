@@ -50,15 +50,14 @@ https://docs.google.com/spreadsheets/d/1Ly7VBCWj0yJb8mM23XbKz0hqFLzxJTH5NuOIlais
     <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.7/dist/aframe-environment-component.min.js"></script>
   </head>
   <body>
-    <a-scene>
-      <!-- <a-scene
-      environment="preset: forest; lighting: point; lightPosition: -5 10 0;"
-    > -->
+    <a-scene environment="preset: forest; lighting: point; lightPosition: -5 10 0;"> 
       <a-assets>
+       <!-- Zone de Collision. -->
         <a-asset-item
           id="navmesh"
           src="../assets/castle/Castle-navmesh5.glb"
         ></a-asset-item>
+       <!-- Modèle 3D. -->
         <a-asset-item
           id="castle"
           src="../assets/castle/Castle.glb"
@@ -80,7 +79,7 @@ https://docs.google.com/spreadsheets/d/1Ly7VBCWj0yJb8mM23XbKz0hqFLzxJTH5NuOIlais
       <a-entity
         nav-mesh
         normal-material
-        visible="true"
+        visible="false"
         position="0 0 20"
         gltf-model="#navmesh"
       ></a-entity>
@@ -90,7 +89,7 @@ https://docs.google.com/spreadsheets/d/1Ly7VBCWj0yJb8mM23XbKz0hqFLzxJTH5NuOIlais
         position="0 0 20"
         scale="3 3 3"
         gltf-model="#castle"
-        visible="false"
+        visible="true"
       >
       </a-entity>
     </a-scene>
