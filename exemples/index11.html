@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My A-Frame Scene</title>
+
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Rotating box -->
+      <a-entity
+        data-cible="cible1"
+        class="clickable"
+        geometry="primitive: box"
+        position="2 2 -5"
+        material="color: blue"
+        rotation="0 0 0"
+        interactable
+      ></a-entity>
+      <a-entity
+        data-cible="cible2"
+        class="clickable"
+        geometry="primitive: box"
+        position="-2 2 -5"
+        material="color: red"
+        rotation="0 0 0"
+        interactable
+      ></a-entity>
+
+      <!-- Cube qui doit apparaître -->
+      <!-- Cible1 -->
+      <a-entity
+        id="cible1"
+        geometry="primitive: box; width: 2; height: 2; depth: 2"
+        position="2 0 -5"
+        material="color: violet"
+        visible="false"
+      ></a-entity>
+      <!-- Cible2 -->
+      <a-entity
+        id="cible2"
+        geometry="primitive: box; width: 2; height: 2; depth: 2"
+        position="-2 0 -5"
+        material="color: orange"
+        visible="false"
+      ></a-entity>
+
+      <!-- Camera rig with laser pointer -->
+      <a-entity id="rig" position="0 0 0">
+        <a-entity camera look-controls position="0 1.6 0"></a-entity>
+        <a-entity
+          laser-controls="hand: left"
+          raycaster="objects: .clickable; far: 20; showLine: true lineColor: red; lineOpacity: 0.5"
+          position="-0.5 1.5 -0.5"
+        ></a-entity>
+      </a-entity>
+
+      <!-- Environment -->
+      <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
+    </a-scene>
+
+    <script>
+      // Component to enable rotation on interaction
+      AFRAME.registerComponent("interactable", {
+        init: function () {
+          // Add event listener for the laser interaction
+          // Change the color of the box on hover
+          this.el.addEventListener("mouseenter", () => {
+            this.el.setAttribute("material", "color", "pink"); // Visual feedback
+          });
+          // Reset the color on mouse leave
+          this.el.addEventListener("mouseleave", () => {
+            this.el.setAttribute("material", "color", "blue"); // Reset color
+          });
+
+          // Add event listener for the click interaction
+          this.el.addEventListener("click", () => {
+            // Get the target entity
+            const target = document.querySelector(
+              `#${this.el.getAttribute("data-cible")}`
+            );
+            // la cible devient visibility
+            target.setAttribute("visible", "true");
+
+            console.log(target);
+          });
+        },
+      });
+    </script>
+  </body>
+</html>
