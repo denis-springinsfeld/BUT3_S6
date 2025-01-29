@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My A-Frame Scene</title>
+
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-text position="0 1 -1" value="No Hit"></a-text>
+      <a-plane
+        color="#FFF"
+        position="2.5 0 2.5"
+        width="5"
+        height="5"
+        rotation="-90 0 0"
+      ></a-plane>
+
+      <!-- Camera rig with laser pointer -->
+      <a-entity id="rig" position="0 0 0">
+        <a-entity
+          wasd-controls
+          camera
+          look-controls
+          position="0 1.6 0"
+          hit-test
+        ></a-entity>
+      </a-entity>
+
+      <!-- Environment -->
+      <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
+    </a-scene>
+
+    <script>
+      AFRAME.registerComponent("hit-test", {
+        init: function () {},
+        tick: function () {
+          const position = this.el.getAttribute("position");
+          if (
+            position.x > 0 &&
+            position.x < 5 &&
+            position.z > 0 &&
+            position.z < 5
+          ) {
+            console.log("hit");
+            document.querySelector("a-text").setAttribute("value", "Hit");
+          } else {
+            console.log("no hit");
+            document.querySelector("a-text").setAttribute("value", "No Hit");
+          }
+        },
+      });
+    </script>
+  </body>
+</html>
