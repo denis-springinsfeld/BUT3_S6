@@ -44,7 +44,7 @@
       AFRAME.registerComponent("play-sound", {
         init: function () {
           this.el.addEventListener("click", function () {
-            var sound = document.querySelector("[sound]");
+            const sound = document.querySelector("[sound]");
 
             sound.components.sound.playSound();
             console.log("Sound played");
