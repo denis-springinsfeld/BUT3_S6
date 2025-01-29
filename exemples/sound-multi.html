@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component play-sound</title>
+
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Chargements de pls sons -->
+      <a-assets>
+        <audio id="sound1" src="assets/son1.mp3"></audio>
+        <audio id="sound2" src="assets/son2.mp3"></audio>
+        <audio id="sound3" src="assets/son3.mp3"></audio>
+      </a-assets>
+      <a-entity
+        class="clickable"
+        id="rotating-box"
+        geometry="primitive: box"
+        position="0 2 -5"
+        material="color: blue"
+        play-sound="soundId: sound2"
+      ></a-entity>
+      <a-entity
+        class="clickable"
+        id="rotating-box"
+        geometry="primitive: box"
+        position="-2 2 -5"
+        material="color: red"
+        play-sound="soundId: sound3"
+      ></a-entity>
+      <a-entity
+        class="clickable"
+        id="rotating-box"
+        geometry="primitive: box"
+        position="2 2 -5"
+        material="color: orange"
+        play-sound="soundId: sound1"
+      ></a-entity>
+
+      <a-entity sound=""></a-entity>
+
+      <!-- Camera rig with laser pointer -->
+      <a-entity id="rig" position="0 0 0">
+        <a-entity camera look-controls position="0 1.6 0"></a-entity>
+        <a-entity
+          laser-controls="hand: left"
+          raycaster="objects: .clickable; far: 20; showLine: true lineColor: red; lineOpacity: 0.5"
+          position="-0.5 1.5 -0.5"
+        ></a-entity>
+      </a-entity>
+
+      <!-- Environment -->
+      <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
+    </a-scene>
+
+    <script>
+      // Component to enable rotation on interaction
+      AFRAME.registerComponent("play-sound", {
+        schema: {
+          soundId: { type: "string", default: "sound" },
+        },
+        init: function () {
+          this.el.addEventListener("click", () => {
+            const soundId = this.data.soundId;
+            const sound = document.querySelector("a-entity[sound]");
+            sound.setAttribute("sound", `src: #${soundId}`);
+            console.log(sound);
+            sound.components.sound.playSound();
+          });
+        },
+      });
+    </script>
+  </body>
+</html>

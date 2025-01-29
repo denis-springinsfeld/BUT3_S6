@@ -3,13 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sol irrégulier avec A-Frame</title>
+    <title>Sound Click Mouse</title>
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
   </head>
   <body>
     <a-scene>
+      <!-- V2 -->
+      <!-- <a-scene cursor="rayOrigin: mouse; fuse: true; fuseTimeout: 500"> -->
       <a-assets>
-        <audio id="sound" src="sound.mp3"></audio>
+        <audio id="sound" src="assets/son1.mp3"></audio>
       </a-assets>
 
       <a-entity cursor position="0 0 -5"></a-entity>
@@ -22,6 +24,14 @@
         depth="1"
         sound="src: #sound; on: click"
       ></a-entity>
+
+      <a-entity id="rig">
+        <a-entity camera look-controls wasd-controls position="0 1.6 0">
+          <a-cursor raycaster></a-cursor>
+          <!-- V2 -->
+          <!-- <a-cursor></a-cursor> -->
+        </a-entity>
+      </a-entity>
     </a-scene>
   </body>
 </html>
