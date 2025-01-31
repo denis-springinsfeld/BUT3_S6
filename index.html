@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      :root {
+        --clr-txt: #191919;
+      }
       * {
         margin: 0;
         padding: 0;
@@ -15,31 +18,31 @@
 
       body {
         min-height: 100vh;
-        background-color: rgb(81, 81, 81);
-        color: #000;
-         background: linear-gradient(
-      #eceff4,
-      #eceff4 6px,
-      transparent 6px,
-      transparent
-    ),
-    fixed linear-gradient(transparent, #fff 70%),
-    fixed
-      repeating-linear-gradient(
-        #efefef,
-        #efefef 1px,
-        transparent 1px,
-        transparent 40px
-      ),
-    fixed
-      repeating-linear-gradient(
-        to right,
-        #efefef,
-        #efefef 1px,
-        transparent 1px,
-        transparent 40px
-      )
-      #fff;
+        padding: 2rem;
+        color: var(--clr-txt);
+        background: linear-gradient(
+            #eceff4,
+            #eceff4 6px,
+            transparent 6px,
+            transparent
+          ),
+          fixed linear-gradient(transparent, #fff 70%),
+          fixed
+            repeating-linear-gradient(
+              #efefef,
+              #efefef 1px,
+              transparent 1px,
+              transparent 40px
+            ),
+          fixed
+            repeating-linear-gradient(
+              to right,
+              #efefef,
+              #efefef 1px,
+              transparent 1px,
+              transparent 40px
+            )
+            #fff;
       }
 
       a {
@@ -48,7 +51,8 @@
       }
 
       h1 {
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
+        text-align: center;
       }
 
       ul {
@@ -70,19 +74,26 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        aspect-ratio: 3/1;
-        background-color: rgb(51, 51, 51);
+        aspect-ratio: 3/2;
         padding: 1rem;
+        background-color: #fff;
+
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         border-radius: 0.5rem;
         text-align: center;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s;
       }
     </style>
   </head>
   <body>
     <div>
-      <h1>Hello A-Frame</h1>
+      <h1>Hello A-Frame VR World</h1>
       <div class="container">
-      <!--  <h2>Exemples</h2>
+        <!--  <h2>Exemples</h2>
         <nav class="nav">
           <ul>
             <li>
@@ -115,7 +126,6 @@
           </ul>
         </nav>
       -->
-        <h2>VR World</h2>
 
         <nav class="nav">
           <ul class="cards">
