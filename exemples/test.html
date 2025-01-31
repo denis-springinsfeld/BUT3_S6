@@ -37,7 +37,7 @@
           const vertices = geometry.attributes.position.array;
 
           for (let i = 0; i < vertices.length; i += 3) {
-            vertices[i + 2] += (Math.random() - 0.5) * 1; // Altitude aléatoire sur l'axe Z
+            vertices[i + 2] += (Math.random() - 0.25) * 1; // Altitude aléatoire sur l'axe Z
           }
 
           geometry.attributes.position.needsUpdate = true;
